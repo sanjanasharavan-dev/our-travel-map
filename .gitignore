@@ -1,0 +1,9 @@
+.DS_Store
+**/.DS_Store
+
+# Personal photos stay on this computer only
+*.jpeg
+*.jpg
+*.png
+*.gif
+*.webp

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>A Journal of Sorts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      background-color: #5C845F;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Love Ya Like A Sister', cursive;
+    }
+
+    /* LEFT LIST */
+    .index-list {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      list-style: none;
+      color: #F7E7C6;
+      font-size: 18px;
+      line-height: 2;
+    }
+
+    .index-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .index-list li:hover {
+      transform: translateX(4px);
+    }
+
+    .index-list a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .index-list img {
+      width: 10px;
+      flex-shrink: 0;
+    }
+
+    /* MAIN COLLAGE */
+    .collage {
+      position: absolute;
+      right: 120px;
+      top: 100px;
+      transform: rotate(-1deg);
+    }
+
+    .collage img {
+      width: 380px;
+      display: block;
+    }
+
+    /* STICKERS */
+    .sticker-wrapper {
+      position: absolute;
+    }
+
+    .sticker-wrapper img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .sticker-wrapper:hover img {
+      transform: scale(1.05) rotate(1deg);
+    }
+
+    /* STICKER TEXT — BASE */
+    .sticker-text {
+      position: absolute;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      color: #2F2F2F;
+      padding: 6px 10px;
+      border-radius: 8px;
+
+      max-width: 220px;        /* default wrap width */
+      white-space: normal;     /* allow wrapping */
+      line-height: 1.4;
+
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .sticker-wrapper:hover .sticker-text {
+      opacity: 1;
+    }
+
+    /* INDIVIDUAL STICKERS + TEXT POSITIONS */
+
+    .songs { top: 120px; left: 60%; width: 60px; }
+    .songs .sticker-text {
+      top: -90px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 280px;
+    }
+
+    .electric { top: 280px; left: 50%; width: 70px; }
+    .electric .sticker-text {
+      right: -240px;
+      top: 16px;
+      max-width: 220px;
+    }
+
+    .bass { top: 280px; left: 46%; width: 70px; }
+    .bass .sticker-text {
+      left: -80px;
+      top: 16px;
+      max-width: 100px;
+    }
+
+    .food { bottom: 280px; left: 74%; width: 70px; }
+    .food .sticker-text {
+      top: -80px;
+      right: 0;
+      max-width: 240px;
+    }
+
+    .kodak { bottom: 140px; left: 60%; width: 90px; }
+    .kodak .sticker-text {
+      bottom: -44px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 200px;
+    }
+
+    .olympus { bottom: 130px; right: 460px; width: 90px; }
+    .olympus .sticker-text {
+      top: -44px;
+      left: 0;
+      max-width: 200px;
+    }
+
+    .santa { top: 480px; right: -3px; width: 60px; }
+    .santa .sticker-text {
+      left: -125px;
+      top: 40px;
+      max-width: 140px;
+    }
+
+    .caroline { top: 780px; right: 180px; width: 40px; }
+    .caroline .sticker-text {
+      right: -166px;
+      top: -15px;
+      max-width: 160px;
+    }
+
+    .rachel { top: 0px; right: 40px; width: 70px; }
+    .rachel .sticker-text {
+      top: 70px;
+      right: -10px;
+      max-width: 600px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LEFT LIST -->
+  <ul class="index-list">
+    <li><img src="images/dot.svg"> places</li>
+    <li><img src="images/dot.svg"> coaster collection</li>
+    <li>
+      <img src="images/dot.svg">
+      <a href="food.html">food</a>
+    </li>
+    <li>
+      <img src="images/dot.svg">
+      <a href="shoes.html">Siddhant wearing shoes before work</a>
+    </li>    
+    <li><img src="images/dot.svg"> music</li>
+    <li><img src="images/dot.svg"> photo walks</li>
+    <li><img src="images/dot.svg"> HBDs</li>
+  </ul>
+
+  <!-- MAIN COLLAGE -->
+  <div class="collage">
+    <img src="images/main-photo.png" alt="a journal of sorts" />
+  </div>
+
+  <!-- STICKERS -->
+  <div class="sticker-wrapper songs">
+    <img src="images/stickers/songs.png">
+    <div class="sticker-text">greatest songwriter to ever exist</div>
+  </div>
+
+  <div class="sticker-wrapper electric">
+    <img src="images/stickers/electric.svg">
+ 
+  </div>
+
+  <div class="sticker-wrapper bass">
+    <img src="images/stickers/bass.svg">
+    <div class="sticker-text">was groomed into playing the bass</div>
+  </div>
+
+  <div class="sticker-wrapper food">
+    <img src="images/stickers/food.png">
+    <div class="sticker-text">love cooking together</div>
+  </div>
+
+  <div class="sticker-wrapper kodak">
+    <img src="images/stickers/kodak.svg">
+
+  </div>
+
+  <div class="sticker-wrapper olympus">
+    <img src="images/stickers/olympus.svg">
+    <div class="sticker-text">avid photo-walkers</div>
+  </div>
+
+  <div class="sticker-wrapper santa">
+    <img src="images/stickers/santa.png">
+    <div class="sticker-text">i cosplay as santa sometimes</div>
+  </div>
+
+  <div class="sticker-wrapper caroline">
+    <img src="images/stickers/caroline.png">
+    <div class="sticker-text">
+      the obnoxiously big caroline polacheck poster that we dearly love
+    </div>
+  </div>
+
+  <div class="sticker-wrapper rachel">
+    <img src="images/stickers/rachel.png">
+    <div class="sticker-text">
+      we occasionally discuss the significance of about time and rachel mcadams
+    </div>
+  </div>
+
+</body>
+</html>

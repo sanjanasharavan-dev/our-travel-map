@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Food</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #FBF1D5;
+}
+
+/* PAGE */
+.food-page {
+  height: 100vh;
+  padding: 2.5rem;
+}
+
+/* LIST */
+.food-list {
+  column-width: 280px;
+  column-gap: 5rem;
+  counter-reset: food;
+}
+
+.food-item {
+  font-size: 16px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  break-inside: avoid;
+  position: relative;
+  width: fit-content;
+}
+
+.food-item::before {
+  counter-increment: food;
+  content: counter(food, decimal-leading-zero) ". ";
+  color: #B72C15;
+}
+
+.food-title {
+  font-family: 'Love Ya Like A Sister', cursive;
+  border-bottom: 2px solid transparent;
+}
+
+.food-item:hover {
+  color: #1769A8;
+}
+
+.food-item:hover .food-title {
+  border-color: #1769A8;
+}
+
+/* HOVER IMAGE */
+.hover-image {
+  position: absolute;
+  left: 120%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 220px;
+  height: 160px;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.food-item:hover .hover-image {
+  opacity: 1;
+}
+
+/* MODAL OVERLAY */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+/* MODAL CARD */
+.modal {
+  width: 650px;
+  height: 435px;          /* ← fixed height */
+  background: #4F8062;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+}
+
+
+.modal {
+  max-height: 60vh;
+}
+
+
+/* TOP BAR */
+.modal-header {
+  background: #CF96A1;
+  padding: 0 20px;              /* horizontal padding only */
+  height: 56px;                 /* fixed height = clean alignment */
+  display: flex;
+  align-items: center;          /* vertical centering */
+  justify-content: space-between;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+
+
+.close {
+  cursor: pointer;
+  font-size: 26px;
+  font-weight: 200;
+}
+
+/* BODY */
+.modal-body {
+  display: flex;
+  gap: 24px;
+  top: 17px;
+  padding: 10px;        /* ← uniform padding */
+  position: relative;
+}
+
+
+/* LEFT TEXT */
+.modal-left {
+  flex: 1;
+  font-family: 'Love Ya Like A Sister', cursive;
+  font-size: 18px;
+  color: #FBF1D5;
+  padding-left: 12px;
+}
+
+/* RIGHT IMAGES */
+.modal-right {
+  width: 360px;
+  max-height: calc(80vh - 80px); /* header + padding */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+.modal-right img {
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+}
+
+
+
+/* FLOATING RECIPE */
+.recipe-float {
+  position: fixed;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  background: #FBF1D5;
+  color: #1769A8;
+  padding: 6px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  display: none;
+  z-index: 2000;
+}
+
+/* ARROWS */
+.modal-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
+.arrow {
+  background: none;
+  color: #FBF1D5;   /* cream */
+  font-size: 36px;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+.modal-arrows {
+  position: absolute;
+  bottom: -40px;              /* pushes arrows BELOW the card */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 48px;
+}
+
+
+/* CHAIRS */
+.chairs {
+  position: fixed;
+  bottom: 16px;
+  right: 24px;
+  width: 350px;
+  z-index: 500;
+  pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="food-page">
+<div class="food-list">
+
+<!-- ALL FOOD ITEMS — UNCHANGED -->
+<div class="food-item" data-title="Breakfast omelette" data-link="PASTE_LINK_HERE">
+  <span class="food-title">Breakfast omelette</span>
+  <img src="images/food/omelette.jpeg" class="hover-image">
+</div>
+
+<div class="food-item" data-title="Ghee rice & egg curry" data-link="PASTE_LINK_HERE">
+  <span class="food-title">Ghee rice & egg curry</span>
+  <img src="images/food/ghee-rice-1.jpeg" class="hover-image">
+</div>
+
+<div class="food-item" data-title="Chicken bibimbap bowl" data-link="PASTE_LINK_HERE">
+  <span class="food-title">Chicken bibimbap bowl</span>
+  <img src="images/food/bibimbap-1.jpeg" class="hover-image">
+</div>
+
+<div class="food-item" data-title="Vodka pasta" data-link="PASTE_LINK_HERE">
+  <span class="food-title">Vodka pasta</span>
+  <img src="images/food/vodka-pasta-1.jpeg" class="hover-image">
+</div>
+
+<div class="food-item" data-title="Coffee pudding?" data-link="PASTE_LINK_HERE">
+  <span class="food-title">Coffee pudding?</span>
+  <img src="images/food/coffee-pudding-1.jpeg" class="hover-image">
+</div>
+
+<div class="food-item" data-title="Caramelised onion pasta" data-link="https://www.youtube.com/shorts/BOp3toxo1IM?feature=share">
+  <span class="food-title">Caramelised onion pasta</span>
+  <img src="images/food/onion-pasta-1.jpeg" class="hover-image">
+</div>
+
+<div class="food-item" data-title="Manchurian sauce & fried rice" data-link="PASTE_LINK_HERE">
+  <span class="food-title">Manchurian sauce & fried rice</span>
+  <img src="images/food/manchurian-1.jpeg" class="hover-image">
+</div>
+
+<div class="food-item" data-title="Alfredo pasta" data-link="PASTE_LINK_HERE">
+  <span class="food-title">Alfredo pasta</span>
+  <img src="images/food/alfredo-1.jpeg" class="hover-image">
+</div>
+
+<div class="food-item" data-title="Chicken with cheese sauce?" data-link="PASTE_LINK_HERE">
+  <span class="food-title">Chicken with cheese sauce?</span>
+  <img src="images/food/cheese-chicken-1.jpeg" class="hover-image">
+</div>
+
+<div class="food-item" data-title="Carbonara" data-link="PASTE_LINK_HERE">
+  <span class="food-title">Carbonara</span>
+  <img src="images/food/carbonara.jpeg" class="hover-image">
+</div>
+
+</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-wrapper">
+
+    <div class="modal" id="modalCard">
+      <div class="modal-header">
+        <div id="modalDate">12/25/2025</div>
+        <div class="close" id="close">×</div>
+      </div>
+
+      <div class="modal-body" id="modalBody">
+        <div class="modal-left" id="modalTitle"></div>
+        <div class="modal-right" id="modalImages"></div>
+      </div>
+    </div>
+
+    <!-- 👇 ADD THIS BLOCK -->
+    <div class="modal-arrows">
+      <div class="arrow" id="prev">←</div>
+      <div class="arrow" id="next">→</div>
+    </div>
+    <!-- 👆 END ADD -->
+
+  </div>
+</div>
+
+
+<div class="recipe-float" id="recipeFloat">link to recipe</div>
+
+<img src="images/food/chairs.svg" class="chairs" alt="chairs">
+
+<script>
+const items = [...document.querySelectorAll('.food-item')];
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modalTitle');
+const modalImages = document.getElementById('modalImages');
+const modalBody = document.getElementById('modalBody');
+const recipeFloat = document.getElementById('recipeFloat');
+
+let currentIndex = 0;
+let currentLink = "";
+
+function openModal(index) {
+  const item = items[index];
+  currentLink = item.dataset.link;
+
+  modalTitle.textContent = item.dataset.title;
+  modalImages.innerHTML = "";
+
+  const img = item.querySelector('.hover-image');
+const clone = img.cloneNode();
+
+clone.classList.remove('hover-image');   // 🔴 critical
+clone.style.position = "static";
+clone.style.transform = "none";
+clone.style.opacity = "1";
+
+modalImages.appendChild(clone);
+
+
+  currentIndex = index;
+  modal.classList.add('active');
+}
+
+items.forEach((item, i) => {
+  item.addEventListener('click', () => openModal(i));
+});
+
+document.getElementById('close').onclick = () => modal.classList.remove('active');
+
+document.getElementById('prev').onclick = () =>
+  openModal((currentIndex - 1 + items.length) % items.length);
+
+document.getElementById('next').onclick = () =>
+  openModal((currentIndex + 1) % items.length);
+
+/* FLOAT ONLY ON GREEN BODY */
+modalBody.addEventListener('mousemove', e => {
+  recipeFloat.style.display = "block";
+  recipeFloat.style.left = e.clientX + 12 + "px";
+  recipeFloat.style.top = e.clientY + 12 + "px";
+});
+
+modalBody.addEventListener('mouseleave', () => {
+  recipeFloat.style.display = "none";
+});
+
+modalBody.addEventListener('click', () => {
+  window.open(currentLink, "_blank");
+});
+
+document.addEventListener('keydown', (e) => {
+  if (!modal.classList.contains('active')) return;
+
+  if (e.key === 'ArrowLeft') {
+    openModal((currentIndex - 1 + items.length) % items.length);
+  }
+
+  if (e.key === 'ArrowRight') {
+    openModal((currentIndex + 1) % items.length);
+  }
+
+  if (e.key === 'Escape') {
+    modal.classList.remove('active');
+  }
+});
+
+</script>
+
+</body>
+</html>
